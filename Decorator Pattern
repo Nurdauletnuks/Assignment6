@@ -1,0 +1,42 @@
+interface Pizza {
+    void makePizza();
+}
+
+class BasicPizza implements Pizza {
+    @Override
+    public void makePizza() {
+        System.out.println("Basic pizza");
+    }
+}
+
+abstract class PizzaDecorator implements Pizza {
+    protected Pizza pizza;
+
+    public PizzaDecorator(Pizza pizza) {
+        this.pizza = pizza;
+    }
+
+    public void makePizza() {
+        pizza.makePizza();
+    }
+}
+
+class PepperoniTopping extends PizzaDecorator {
+    public PepperoniTopping(Pizza pizza) {
+        super(pizza);
+    }
+
+    @Override
+    public void makePizza() {
+        super.makePizza();
+        System.out.println("Adding pepperoni topping");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Pizza basicPizza = new BasicPizza();
+        Pizza pepperoniPizza = new PepperoniTopping(basicPizza);
+        pepperoniPizza.makePizza();
+    }
+}
