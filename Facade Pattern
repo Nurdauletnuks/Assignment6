@@ -1,0 +1,34 @@
+class BookInventorySystem {
+    public void updateBookAvailability(String title, boolean available) {
+        // Update book availability in the database
+    }
+}
+
+class UserManagementSystem {
+    public void borrowBook(String title, String userId) {
+        // Record book borrowing information in the database
+    }
+}
+
+class LibraryFacade {
+    private BookInventorySystem bookSystem;
+    private UserManagementSystem userSystem;
+
+    public LibraryFacade() {
+        this.bookSystem = new BookInventorySystem();
+        this.userSystem = new UserManagementSystem();
+    }
+
+    public void borrowBook(String title, String userId) {
+        bookSystem.updateBookAvailability(title, false);
+        userSystem.borrowBook(title, userId);
+        System.out.println("Book borrowed successfully.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LibraryFacade facade = new LibraryFacade();
+        facade.borrowBook("The Great Gatsby", "user123");
+    }
+}
